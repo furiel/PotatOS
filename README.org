@@ -1,0 +1,8 @@
+#+TITLE: PotatOS
+
+This is a just for fun playgroud for OS development. For educational purposes.
+
+* Usage
+- Install cross compiler based on [[https://wiki.osdev.org/GCC_Cross-Compiler][osdev]] documentation
+- ~make~
+- ~qemu-system-i386 -kernel potatos.bin~
