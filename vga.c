@@ -35,14 +35,28 @@ clear_screen(void)
     vga_buffer[i] = (uint16_t)' ' | (uint16_t)(VGA_COLOR_BLACK << 8);
 }
 
+static void
+skip_rest_line()
+{
+  int column = (cursor % VGA_WIDTH);
+  int missing_spaces = VGA_WIDTH - column;
+  while (missing_spaces--)
+    vga_write(" ");
+}
+
 void
 vga_write(const char *text)
 {
   char c;
-  for (char *p = text; *p; p++)
+  for (const char *p = text; *p; p++)
     {
       c = *p;
-      vga_buffer[cursor] = (uint16_t)c | (uint16_t)(VGA_COLOR_LIGHT_GREY << 8);
-      cursor++;
+      if (c == '\n')
+        skip_rest_line();
+      else
+        {
+          vga_buffer[cursor] = (uint16_t)c | (uint16_t)(VGA_COLOR_LIGHT_GREY << 8);
+          cursor++;
+        }
     }
 }

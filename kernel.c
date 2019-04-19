@@ -3,5 +3,5 @@
 void kernel_main(void)
 {
   clear_screen();
-  vga_write("Hello world");
+  vga_write("Hello world\n");
 }
