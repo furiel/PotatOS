@@ -41,16 +41,16 @@ skip_rest_line()
   int column = (cursor % VGA_WIDTH);
   int missing_spaces = VGA_WIDTH - column;
   while (missing_spaces--)
-    vga_write(" ");
+    vga_write(" ", 1);
 }
 
 void
-vga_write(const char *text)
+vga_write(const char *text, size_t len)
 {
   char c;
-  for (const char *p = text; *p; p++)
+  for (size_t i = 0; i < len; i++)
     {
-      c = *p;
+      c = text[i];
       if (c == '\n')
         skip_rest_line();
       else
@@ -59,4 +59,18 @@ vga_write(const char *text)
           cursor++;
         }
     }
+}
+
+static size_t
+strlen(const char *text)
+{
+  int i = 0;
+  while(text[i++]);
+  return i-1;
+}
+
+void
+vga_print(const char *text)
+{
+  vga_write(text, strlen(text));
 }
