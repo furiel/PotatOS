@@ -7,6 +7,7 @@ const size_t VGA_WIDTH = 80;
 const size_t VGA_HEIGHT = 20;
 
 uint16_t *vga_buffer = (uint16_t *)0xB8000;
+int cursor = 0;
 
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
@@ -35,16 +36,13 @@ clear_screen(void)
 }
 
 void
-vga_write(void)
+vga_write(const char *text)
 {
-  char *text = "Hello world";
-
   char c;
-  int index = 0;
   for (char *p = text; *p; p++)
     {
       c = *p;
-      vga_buffer[index] = (uint16_t)c | (uint16_t)(VGA_COLOR_LIGHT_GREY << 8);
-      index++;
+      vga_buffer[cursor] = (uint16_t)c | (uint16_t)(VGA_COLOR_LIGHT_GREY << 8);
+      cursor++;
     }
 }
