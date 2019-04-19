@@ -74,3 +74,18 @@ vga_print(const char *text)
 {
   vga_write(text, strlen(text));
 }
+
+void
+vga_print_hexa(uint32_t num)
+{
+  const char *digits = "0123456789ABCDEFabcdefghijklm";
+
+  char result[8];
+
+  for (int i = 7; i >= 0; i--)
+    {
+      result[i] = digits[num & 0xF];
+      num >>= 4;
+    }
+  vga_write(result, 8);
+}
