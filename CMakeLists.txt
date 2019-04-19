@@ -3,7 +3,7 @@ set(CMAKE_C_COMPILER_WORKS 1)
 
 project(PotatOS C ASM)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -ffreestanding -O2 -Wall -Wextra")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -ffreestanding -O2 -Wall -Wextra -Werror")
 
 set (SOURCES
   linker.ld
