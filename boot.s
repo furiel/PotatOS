@@ -10,6 +10,11 @@
 .long FLAGS
 .long CHECKSUM
 
+.global multiboot_info
+
+.section .data
+multiboot_info: .word 0
+
 .section .bss
 .align 16
 stack_bottom:
@@ -21,6 +26,7 @@ stack_top:
 .type _start, @function
 _start:
 	mov $stack_top, %esp
+        mov %ebx, multiboot_info
         call kernel_main
 	cli
 halt_loop:

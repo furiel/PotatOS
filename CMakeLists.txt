@@ -8,6 +8,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -ffreestanding -O2 -Wall -Wextra 
 set (SOURCES
   linker.ld
   boot.s
+  multiboot.c
   kernel.c
   vga.c)
 
